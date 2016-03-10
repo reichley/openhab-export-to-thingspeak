@@ -168,10 +168,11 @@ if [ "$answer2" == "y" ] || [ "$answer2" == "Y" ]; then
 	printf "f6=\`curl -s http://$ip_addy:$port/rest/items/$field6/state | cut -c 1-5\`\n" >> habspeakcron.sh
 	printf "f7=\`curl -s http://$ip_addy:$port/rest/items/$field7/state | cut -c 1-5\`\n" >> habspeakcron.sh
 	printf "f8=\`curl -s http://$ip_addy:$port/rest/items/$field8/state | cut -c 1-5\`\n" >> habspeakcron.sh
-	printf 'curl -k --data  "api_key=\$api_key&field1=\$f1&field2=\$f2&field3=\$f3&field4=\$f4&field5=\$f5&field6=\$f6&field7=\$f7&field8=\$f8" https://api.thingspeak.com/update\n' >> habspeakcron.sh
+	printf "d=`date`"
+	printf "%s = \" \"$d\"; curl -k --data  \"api_key=\$api_key&field1=\$f1&field2=\$f2&field3=\$f3&field4=\$f4&field5=\$f5&field6=\$f6&field7=\$f7&field8=\$f8\" https://api.thingspeak.com/update\n" >> habspeakcron.sh
 fi
-
-curl -k --data  "api_key=$api_key&field1=$f1&field2=$f2&field3=$f3&field4=$f4&field5=$f5&field6=$f6&field7=$f7&field8=$f8" https://api.thingspeak.com/update
+d=`date`
+printf "%s = " "$d"; curl -k --data  "api_key=$api_key&field1=$f1&field2=$f2&field3=$f3&field4=$f4&field5=$f5&field6=$f6&field7=$f7&field8=$f8" https://api.thingspeak.com/update
 echo ""
 echo "finished!"
 echo ""
